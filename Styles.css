@@ -115,3 +115,69 @@ hr{
     filter: invert(1);
     padding-top: 5rem;
 }
+
+
+/* Estilos del Navbar */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.nav-link {
+    font-size: 1.2em;
+}
+
+.menu-icon {
+    font-size: 1.5em;
+}
+
+/* Estilos de las tarjetas de noticias */
+.news-card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.news-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75em 1em;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+    font-weight: bold;
+}
+
+.news-title {
+    font-size: 1.2em;
+}
+
+.news-date {
+    font-size: 0.9em;
+    color: gray;
+}
+
+.news-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.news-description {
+    font-size: 1em;
+    color: #555;
+    background-color: #f0f0f0;
+    padding: 0.5em;
+    border-radius: 5px;
+    margin-top: 0.5em;
+}
+
+/* Estilo de botón Resumen */
+.btn-resumen {
+    width: 100%;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 1em;
+    border-radius: 10px;
+}
