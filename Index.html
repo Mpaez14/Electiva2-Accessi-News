@@ -14,184 +14,193 @@
         crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
         <link type="text/css" rel="stylesheet" href="./Styles.css">
+        <script src="./feed.js" defer></script>
     </head>
     <body>
 
-        <header id="header">
-            <div class="d-flex flex-row justify-content-between w-100 mb-5">
-                <h1 class="text-light m-3"><i>Accessi-News</i></h1>
+        <header id="header" class="d-flex flex-column align-items-center">
+
+            <div class="d-flex flex-row justify-content-between w-100">
+                <h1 class="text-light m-5"><i>Accessi-News</i></h1>
 
                 <div class="dropdown ms-3">
                     <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                        <button class="btn btn-outline-light btn-lg m-3"><i class="bi bi-list"></i></button>
+                        <button class="btn btn-outline-light btn-lg m-5"><i class="bi bi-list"></i></button>
                     </a>
                     <ul class="dropdown-menu custom-dropdown" aria-labelledby="dropdownMenuButton">
-                        <button type="btn btn-light" class="dropdown-item opcion-config" data-bs-toggle="modal"
+                        <button type="btn btn-light" class="dropdown-item opcion-config fs-5" data-bs-toggle="modal"
                             data-bs-target="#voiceOptionsModal">Opciones de Narrador</button>
-                        <button type="btn btn-light" class="dropdown-item opcion-config" data-bs-toggle="modal"
+                        <button type="btn btn-light" class="dropdown-item opcion-config fs-5" data-bs-toggle="modal"
                             data-bs-target="#contrastModal">Contraste</button>
-                        <button type="btn btn-light" class="dropdown-item opcion-config" data-bs-toggle="modal"
+                        <button type="btn btn-light" class="dropdown-item opcion-config fs-5" data-bs-toggle="modal"
                             data-bs-target="#fontSizeModal">Tamaño de Fuente</button>
                     </ul>
                 </div>
             </div>
-
-            
             
             <nav id="header-nav">
-                <ul class="m-0 tabs-contenido">
-                    <li id="nacionales" class="isactive">
-                        <h3>Nacionales</h3>
-                    </li>
-                    <li id="internacionales">
-                        <h3>Internacionales</h3>
-                    </li>
-                    <li id="Otros">
-                        <h3>Otros</h3>
-                    </li>
+                <ul class="m-0 p-0 tabs-contenido d-flex flex-row">
+                    <a href="#nacionales">
+                        <li id="tab-nacionales" class="px-5 py-2">
+                            <h3>Nacionales</h3>
+                        </li>
+                    </a>
+                    <a href="#internacionales">
+                        <li id="tab-internacionales" class="px-5 py-2">
+                            <h3>Internacionales</h3>
+                        </li>
+                    </a>
+                    <a href="#otros">
+                        <li id="tab-otros" class="px-5 py-2">
+                            <h3>Otros</h3>
+                        </li>
+                    </a>
                 </ul>
             </nav>
+
         </header>
         
         <article id="site"></article>
         <section id="posts"></section>
 
-        <!-- MODALES -->
-<div class="modal fade" id="fontSizeModal" tabindex="-1" aria-labelledby="fontSizeModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="fontSizeModalLabel">Configurar Tamaño de Fuente</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <label for="fontSizeSelect">Selecciona el tamaño de la fuente:</label>
-                <select id="fontSizeSelect" class="form-select">
-                    <option value="small">Pequeño</option>
-                    <option value="medium">Mediano</option>
-                    <option value="large">Grande</option>
-                </select>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="saveFontSizeBtn">Guardar Cambios</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Contraste -->
-<div class="modal fade" id="contrastModal" tabindex="-1" aria-labelledby="contrastModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="contrastModalLabel">Configurar Contraste</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="contrastOptions" id="lightMode" value="light">
-                    <label class="form-check-label" for="lightMode">Modo Claro</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="contrastOptions" id="darkMode" value="dark">
-                    <label class="form-check-label" for="darkMode">Modo Oscuro</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="contrastOptions" id="highContrastMode" value="high-contrast">
-                    <label class="form-check-label" for="highContrastMode">Alto Contraste</label>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="saveContrastBtn">Guardar Cambios</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Modal Narrador -->
-<div class="modal fade" id="voiceOptionsModal" tabindex="-1" aria-labelledby="voiceOptionsModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="voiceOptionsModalLabel">Configurar Narrador</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <label for="voiceSpeed">Velocidad de la Voz:</label>
-                <input type="range" id="voiceSpeed" min="0.5" max="2" step="0.1" value="1">
-                <label for="voiceVolume">Volumen:</label>
-                <input type="range" id="voiceVolume" min="0" max="1" step="0.1" value="1">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="enableNarrator" checked>
-                    <label class="form-check-label" for="enableNarrator">Activar Narrador</label>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="saveNarratorBtn">Guardar Cambios</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div >
-
-<!-- Contenedor de Noticias -->
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <!-- Tarjeta de noticia 1 -->
-        <div class="col-md-4 mb-4">
-            <div class="card news-card">
-                <div class="card-header">
-                    <span class="news-title">Título</span>
-                    <span class="news-date">Fecha</span>
-                </div>
-                <div class="card-body">
-                    <img src="https://via.placeholder.com/150" alt="Imagen de noticia" class="img-fluid news-image">
-                    <div class="news-description mt-2">Descripción de la noticia...</div>
-                    <button class="btn btn-dark btn-resumen">Resumen</button>
+        <!-- Modal configuración de fuente -->
+        <div class="modal fade" id="fontSizeModal" tabindex="-1" aria-labelledby="fontSizeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="fontSizeModalLabel">Configurar Tamaño de Fuente</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="fontSizeSelect">Selecciona el tamaño de la fuente:</label>
+                        <select id="fontSizeSelect" class="form-select">
+                            <option value="small">Pequeño</option>
+                            <option value="medium">Mediano</option>
+                            <option value="large">Grande</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="saveFontSizeBtn">Guardar Cambios</button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Tarjeta de noticia 2 -->
-        <div class="col-md-4 mb-4">
-            <div class="card news-card">
-                <div class="card-header">
-                    <span class="news-title">Título</span>
-                    <span class="news-date">Fecha</span>
-                </div>
-                <div class="card-body">
-                    <img src="https://via.placeholder.com/150" alt="Imagen de noticia" class="img-fluid news-image">
-                    <div class="news-description mt-2">Descripción de la noticia...</div>
-                    <button class="btn btn-dark btn-resumen">Resumen</button>
+        <!-- Modal configuración de contraste -->
+        <div class="modal fade" id="contrastModal" tabindex="-1" aria-labelledby="contrastModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="contrastModalLabel">Configurar Contraste</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="contrastOptions" id="lightMode" value="light">
+                            <label class="form-check-label" for="lightMode">Modo Claro</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="contrastOptions" id="darkMode" value="dark">
+                            <label class="form-check-label" for="darkMode">Modo Oscuro</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="contrastOptions" id="highContrastMode" value="high-contrast">
+                            <label class="form-check-label" for="highContrastMode">Alto Contraste</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="saveContrastBtn">Guardar Cambios</button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Tarjeta de noticia 3 -->
-        <div class="col-md-4 mb-4">
-            <div class="card news-card">
-                <div class="card-header">
-                    <span class="news-title">Título</span>
-                    <span class="news-date">Fecha</span>
-                </div>
-                <div class="card-body">
-                    <img src="https://via.placeholder.com/150" alt="Imagen de noticia" class="img-fluid news-image">
-                    <div class="news-description mt-2">Descripción de la noticia...</div>
-                    <button class="btn btn-dark btn-resumen">Resumen</button>
+
+        <!-- Modal configuración de narrador -->
+        <div class="modal fade" id="voiceOptionsModal" tabindex="-1" aria-labelledby="voiceOptionsModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="voiceOptionsModalLabel">Configurar Narrador</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="voiceSpeed">Velocidad de la Voz:</label>
+                        <input type="range" id="voiceSpeed" min="0.5" max="2" step="0.1" value="1">
+                        <label for="voiceVolume">Volumen:</label>
+                        <input type="range" id="voiceVolume" min="0" max="1" step="0.1" value="1">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="enableNarrator" checked>
+                            <label class="form-check-label" for="enableNarrator">Activar Narrador</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="saveNarratorBtn">Guardar Cambios</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-</div>
 
+        <div >
 
+            <!-- Contenedor de Noticias -->
+            <div class="container mt-5 d-flex flex-column justify-content-center">
+                <!-- loader -->
+                <img src="./assets/loader.svg" id="loader" alt="Cargando..">
+
+                <div id="cards-container" class="row justify-content-center d-none">
+
+                    <!-- Tarjeta de noticia 1 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card news-card">
+                            <div class="card-header">
+                                <span class="news-title">Título</span>
+                                <span class="news-date">Fecha</span>
+                            </div>
+                            <div class="card-body">
+                                <img src="https://via.placeholder.com/150" alt="Imagen de noticia" class="img-fluid news-image">
+                                <div class="news-description mt-2">Descripción de la noticia...</div>
+                                <button class="btn btn-dark btn-resumen">Resumen</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de noticia 2 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card news-card">
+                            <div class="card-header">
+                                <span class="news-title">Título</span>
+                                <span class="news-date">Fecha</span>
+                            </div>
+                            <div class="card-body">
+                                <img src="https://via.placeholder.com/150" alt="Imagen de noticia" class="img-fluid news-image">
+                                <div class="news-description mt-2">Descripción de la noticia...</div>
+                                <button class="btn btn-dark btn-resumen">Resumen</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de noticia 3 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card news-card">
+                            <div class="card-header">
+                                <span class="news-title">Título</span>
+                                <span class="news-date">Fecha</span>
+                            </div>
+                            <div class="card-body">
+                                <img src="https://via.placeholder.com/150" alt="Imagen de noticia" class="img-fluid news-image">
+                                <div class="news-description mt-2">Descripción de la noticia...</div>
+                                <button class="btn btn-dark btn-resumen">Resumen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </body>
 </html>
