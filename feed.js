@@ -1,4 +1,37 @@
-document.addEventListener("DOMContentLoaded", e => {
+const recognition = new webkitSpeechRecognition();
+
+recognition.continuous = true;
+recognition.lang = 'es-ES';
+recognition.interimResult = false;
+
+let voces = [];
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const $speechSelect = document.getElementById("speech-select"),
+    speechMessage = new SpeechSynthesisUtterance();
+
+    console.log(window.speechSynthesis.getVoices());
+
+    $speechSelect.addEventListener("change", function() {
+    
+        speechMessage.voice = voces.find( (voice) => voice.name === $speechSelect.value);
+
+    });
+
+    window.speechSynthesis.addEventListener("voiceschanged", function() {
+
+        voces = window.speechSynthesis.getVoices();
+        let vocesEnEspanol = voces.filter(voz => voz.lang.startsWith("es"));
+
+        vocesEnEspanol.forEach( (voz) => {
+            const $option = document.createElement("option");
+            $option.value = voz.name;
+            $option.textContent = `${voz.name} - ${voz.lang}`;
+            $speechSelect.appendChild($option);
+        });
+
+    });
 
     verificarSeccion();
     
