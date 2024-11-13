@@ -165,3 +165,9 @@ hr{
     margin-top: 1em;
     border-radius: 10px;
 }
+
+/* Estilos de modal de noticia */
+
+.modal-dialog{
+    max-width: 50rem !important;
+}
