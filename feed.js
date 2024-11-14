@@ -99,7 +99,7 @@ function manejarContenido(seccion){
             tabEconomia.classList.remove("isactive");
 
             cardsContainer.classList.add('d-none');
-            mostrarLoader(2);
+            mostrarLoader(1);
             break;
 
         case '#deportes':
@@ -110,7 +110,7 @@ function manejarContenido(seccion){
             tabEconomia.classList.remove("isactive");
 
             cardsContainer.classList.add('d-none');
-            mostrarLoader(2);
+            mostrarLoader(1);
             break;
         case '#tecnologia':
             tabNacionales.classList.remove("isactive");
@@ -130,7 +130,7 @@ function manejarContenido(seccion){
             tabEconomia.classList.add("isactive");
         
                 cardsContainer.classList.add('d-none');
-                mostrarLoader(2);
+                mostrarLoader(1);
                 break;
 
         default:
