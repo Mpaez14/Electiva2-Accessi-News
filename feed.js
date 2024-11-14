@@ -71,7 +71,9 @@ function manejarContenido(seccion){
 
     const tabNacionales = document.getElementById("tab-nacionales");
     const tabInternacionales = document.getElementById("tab-internacionales");
-    const tabOtros = document.getElementById("tab-otros");
+    const tabDeportes = document.getElementById("tab-deportes");
+    const tabTecnologia = document.getElementById("tab-tecnologia");
+    const tabEconomia = document.getElementById("tab-economia");
 
     const cardsContainer = document.getElementById('cards-container');
 
@@ -80,7 +82,9 @@ function manejarContenido(seccion){
         case '#nacionales':
             tabNacionales.classList.add("isactive");
             tabInternacionales.classList.remove("isactive");
-            tabOtros.classList.remove("isactive");
+            tabDeportes.classList.remove("isactive");
+            tabTecnologia.classList.remove("isactive");
+            tabEconomia.classList.remove("isactive");
 
             cardsContainer.classList.add('d-none');
             mostrarLoader(2);
@@ -90,20 +94,44 @@ function manejarContenido(seccion){
                 
             tabNacionales.classList.remove("isactive");
             tabInternacionales.classList.add("isactive");
-            tabOtros.classList.remove("isactive");
+            tabDeportes.classList.remove("isactive");
+            tabTecnologia.classList.remove("isactive");
+            tabEconomia.classList.remove("isactive");
 
             cardsContainer.classList.add('d-none');
             mostrarLoader(2);
             break;
 
-        case '#otros':
+        case '#deportes':
             tabNacionales.classList.remove("isactive");
             tabInternacionales.classList.remove("isactive");
-            tabOtros.classList.add("isactive");
+            tabDeportes.classList.add("isactive");
+            tabTecnologia.classList.remove("isactive");
+            tabEconomia.classList.remove("isactive");
 
             cardsContainer.classList.add('d-none');
             mostrarLoader(2);
             break;
+        case '#tecnologia':
+            tabNacionales.classList.remove("isactive");
+            tabInternacionales.classList.remove("isactive");
+            tabDeportes.classList.remove("isactive");
+            tabTecnologia.classList.add("isactive");
+            tabEconomia.classList.remove("isactive");
+    
+                cardsContainer.classList.add('d-none');
+                mostrarLoader(2);
+                break;
+        case '#economia':
+            tabNacionales.classList.remove("isactive");
+            tabInternacionales.classList.remove("isactive");
+            tabDeportes.classList.remove("isactive");
+            tabTecnologia.classList.remove("isactive");
+            tabEconomia.classList.add("isactive");
+        
+                cardsContainer.classList.add('d-none');
+                mostrarLoader(2);
+                break;
 
         default:
 
