@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no">
         <title>Accessi-News</title>
+        <link rel="icon" type="favicon/x-icon" href="./assets/logo.png">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;500&display=swap" rel="stylesheet">
@@ -69,9 +70,6 @@
             </nav>
 
         </header>
-        
-        <article id="site"></article>
-        <section id="posts"></section>
 
         <!-- Modal configuración de fuente -->
         <div class="modal fade" id="fontSizeModal" tabindex="-1" aria-labelledby="fontSizeModalLabel" aria-hidden="true">
@@ -165,100 +163,34 @@
 
         <div>
 
-            <!-- Contenedor de Noticias -->
-            <div class="container mt-5 d-flex flex-column justify-content-center">
+            <!-- Contenedor principal -->
+            <div class="container mt-5 d-flex flex-column justify-content-center" id="posts">
+                
+                <!-- Contenedor de cards de noticias -->
+                <div id="cards-container" class="row justify-content-center"></div>
+
                 <!-- loader -->
-                <img src="./assets/loader.svg" id="loader" alt="Cargando..">
+                <img src="./assets/loader.svg" id="loader" alt="Cargando.." class="mb-5">
 
-                <div id="cards-container" class="row justify-content-center d-none">
-
-                    <!-- Tarjeta de noticia 1 -->
-                    <div class="col-md-4 mb-4">
-                        <div class="card news-card">
-                            <div class="card-header">
-                                <span class="news-title">Título</span>
-                                <span class="news-date">Fecha</span>
-                            </div>
-                            <div class="card-body">
-                                <img src="./assets/150x150.jpg" alt="Imagen de noticia" class="img-fluid news-image">
-                                <div class="news-description mt-2">Descripción de la noticia...</div>
-                                <button class="btn btn-dark btn-resumen" data-bs-toggle="modal" data-bs-target="#exampleModal">Resumen</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Tarjeta de noticia 2 -->
-                    <div class="col-md-4 mb-4">
-                        <div class="card news-card">
-                            <div class="card-header">
-                                <span class="news-title">Título</span>
-                                <span class="news-date">Fecha</span>
-                            </div>
-                            <div class="card-body">
-                                <img src="./assets/150x150.jpg" alt="Imagen de noticia" class="img-fluid news-image">
-                                <div class="news-description mt-2">Descripción de la noticia...</div>
-                                <button class="btn btn-dark btn-resumen" data-bs-toggle="modal" data-bs-target="#exampleModal">Resumen</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Tarjeta de noticia 3 -->
-                    <div class="col-md-4 mb-4">
-                        <div class="card news-card">
-                            <div class="card-header">
-                                <span class="news-title">Título</span>
-                                <span class="news-date">Fecha</span>
-                            </div>
-                            <div class="card-body">
-                                <img src="./assets/150x150.jpg" alt="Imagen de noticia" class="img-fluid news-image">
-                                <div class="news-description mt-2">Descripción de la noticia...</div>
-                                <button class="btn btn-dark btn-resumen" data-bs-toggle="modal" data-bs-target="#exampleModal">Resumen</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
         </div>
         
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- Modal de contenido de la noticia -->
+        <div class="modal fade" id="modalContenidoNoticia" tabindex="-1" aria-labelledby="modalLabelNoticia" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
 
                     <div class="modal-header d-flex flex-row justify-content-between">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Titulo de noticia</h1>
-                        <span>08-11-2024</span>
+                        <h1 class="modal-new-title fs-5" id="modalLabelNoticia"></h1>
+                        <span class="modal-new-date text-secondary"></span>
                     </div>
 
-                    <div class="modal-body" tabindex="0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam finibus sapien risus, quis ultricies tortor aliquet vitae. Donec rhoncus lorem congue, volutpat nisl et, tempor diam. Ut pellentesque a dolor vel facilisis. Duis elementum lorem diam, a dapibus lectus euismod nec. Aliquam in posuere ante. Integer erat urna, gravida vitae est in, efficitur elementum eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-
-                        Mauris id nulla egestas, tempus nunc vitae, convallis erat. Phasellus a pulvinar massa. Aenean sollicitudin erat hendrerit posuere tempus. Fusce lacus mi, bibendum sit amet molestie quis, bibendum quis dolor. Quisque eget tincidunt erat. Nullam aliquam mi vel mi molestie, sagittis dignissim eros gravida. Quisque non gravida justo. Quisque imperdiet ut sapien eget sollicitudin. Maecenas sollicitudin est sit amet risus placerat pulvinar.
-                        
-                        Pellentesque blandit porta sagittis. Integer quis mattis metus. Suspendisse varius diam aliquet dui varius aliquet. Ut pulvinar in libero id rhoncus. In eget mi cursus, venenatis risus id, auctor odio. Curabitur rhoncus massa nec elit dignissim, in pharetra leo vehicula. Suspendisse non nisl commodo, gravida libero nec, mattis diam. Mauris sed finibus ex. Nunc iaculis orci vel lacus rhoncus, sit amet rhoncus lectus egestas. Vivamus eleifend mollis venenatis. Sed ligula eros, tristique vitae dictum vel, convallis sed est. Suspendisse potenti. Aenean tristique, justo non congue feugiat, tortor dui convallis tortor, nec lobortis eros odio quis turpis. Nam ex justo, porta sit amet lorem et, condimentum accumsan ligula. Nunc ligula sem, eleifend vitae sapien id, finibus laoreet velit. Nulla at massa nec odio volutpat ornare commodo id ligula.
-                        
-                        Nullam rhoncus ex et lorem ullamcorper, eget convallis leo facilisis. Nam a libero faucibus, venenatis sapien at, finibus lorem. Donec facilisis velit sed metus posuere ullamcorper. Etiam eu magna quis risus porta rhoncus. Etiam dignissim mollis accumsan. Integer et massa in mauris fermentum maximus. Curabitur eu accumsan nulla.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam finibus sapien risus, quis ultricies tortor aliquet vitae. Donec rhoncus lorem congue, volutpat nisl et, tempor diam. Ut pellentesque a dolor vel facilisis. Duis elementum lorem diam, a dapibus lectus euismod nec. Aliquam in posuere ante. Integer erat urna, gravida vitae est in, efficitur elementum eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-
-                        Mauris id nulla egestas, tempus nunc vitae, convallis erat. Phasellus a pulvinar massa. Aenean sollicitudin erat hendrerit posuere tempus. Fusce lacus mi, bibendum sit amet molestie quis, bibendum quis dolor. Quisque eget tincidunt erat. Nullam aliquam mi vel mi molestie, sagittis dignissim eros gravida. Quisque non gravida justo. Quisque imperdiet ut sapien eget sollicitudin. Maecenas sollicitudin est sit amet risus placerat pulvinar.
-                        
-                        Pellentesque blandit porta sagittis. Integer quis mattis metus. Suspendisse varius diam aliquet dui varius aliquet. Ut pulvinar in libero id rhoncus. In eget mi cursus, venenatis risus id, auctor odio. Curabitur rhoncus massa nec elit dignissim, in pharetra leo vehicula. Suspendisse non nisl commodo, gravida libero nec, mattis diam. Mauris sed finibus ex. Nunc iaculis orci vel lacus rhoncus, sit amet rhoncus lectus egestas. Vivamus eleifend mollis venenatis. Sed ligula eros, tristique vitae dictum vel, convallis sed est. Suspendisse potenti. Aenean tristique, justo non congue feugiat, tortor dui convallis tortor, nec lobortis eros odio quis turpis. Nam ex justo, porta sit amet lorem et, condimentum accumsan ligula. Nunc ligula sem, eleifend vitae sapien id, finibus laoreet velit. Nulla at massa nec odio volutpat ornare commodo id ligula.
-                        
-                        Nullam rhoncus ex et lorem ullamcorper, eget convallis leo facilisis. Nam a libero faucibus, venenatis sapien at, finibus lorem. Donec facilisis velit sed metus posuere ullamcorper. Etiam eu magna quis risus porta rhoncus. Etiam dignissim mollis accumsan. Integer et massa in mauris fermentum maximus. Curabitur eu accumsan nulla.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam finibus sapien risus, quis ultricies tortor aliquet vitae. Donec rhoncus lorem congue, volutpat nisl et, tempor diam. Ut pellentesque a dolor vel facilisis. Duis elementum lorem diam, a dapibus lectus euismod nec. Aliquam in posuere ante. Integer erat urna, gravida vitae est in, efficitur elementum eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-
-                        Mauris id nulla egestas, tempus nunc vitae, convallis erat. Phasellus a pulvinar massa. Aenean sollicitudin erat hendrerit posuere tempus. Fusce lacus mi, bibendum sit amet molestie quis, bibendum quis dolor. Quisque eget tincidunt erat. Nullam aliquam mi vel mi molestie, sagittis dignissim eros gravida. Quisque non gravida justo. Quisque imperdiet ut sapien eget sollicitudin. Maecenas sollicitudin est sit amet risus placerat pulvinar.
-                        
-                        Pellentesque blandit porta sagittis. Integer quis mattis metus. Suspendisse varius diam aliquet dui varius aliquet. Ut pulvinar in libero id rhoncus. In eget mi cursus, venenatis risus id, auctor odio. Curabitur rhoncus massa nec elit dignissim, in pharetra leo vehicula. Suspendisse non nisl commodo, gravida libero nec, mattis diam. Mauris sed finibus ex. Nunc iaculis orci vel lacus rhoncus, sit amet rhoncus lectus egestas. Vivamus eleifend mollis venenatis. Sed ligula eros, tristique vitae dictum vel, convallis sed est. Suspendisse potenti. Aenean tristique, justo non congue feugiat, tortor dui convallis tortor, nec lobortis eros odio quis turpis. Nam ex justo, porta sit amet lorem et, condimentum accumsan ligula. Nunc ligula sem, eleifend vitae sapien id, finibus laoreet velit. Nulla at massa nec odio volutpat ornare commodo id ligula.
-                        
-                        Nullam rhoncus ex et lorem ullamcorper, eget convallis leo facilisis. Nam a libero faucibus, venenatis sapien at, finibus lorem. Donec facilisis velit sed metus posuere ullamcorper. Etiam eu magna quis risus porta rhoncus. Etiam dignissim mollis accumsan. Integer et massa in mauris fermentum maximus. Curabitur eu accumsan nulla.
-                        
-                        Aenean aliquam risus felis, ultrices commodo mi rutrum in. Nam quis magna venenatis, luctus turpis in, cursus nisl. Donec in purus non dolor fermentum ullamcorper tincidunt sit amet sem. Nam tristique nibh ac fermentum eleifend. In ut libero iaculis, blandit urna iaculis, malesuada leo. Integer feugiat gravida mauris, at ultrices augue eleifend non. In hac habitasse platea dictumst. In dictum ac mauris id vulputate. In elementum purus iaculis tincidunt mattis. Fusce ornare, massa cursus facilisis facilisis, dui mi sollicitudin eros, eget faucibus erat urna eu arcu. Nam dictum, arcu in molestie blandit, nibh magna ultricies urna, eget iaculis mauris magna vitae mauris. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce ut velit et ipsum dignissim vestibulum non ut metus.
+                    <div class="modal-new-content m-5 overflow-y-auto" tabindex="0">
                     </div>
 
                     <div class="modal-footer justify-content-between">
-                        <a href>Ir a original</a>
+                        <a href="" class="modal-new-link fw-bolder" target="_blank">Ir a original</a>
                         <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
