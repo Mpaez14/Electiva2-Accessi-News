@@ -19,15 +19,13 @@
     </head>
     <body>
 
-        <header id="header" class="d-flex flex-column align-items-center">
+        <header id="header">
 
-            <div class="d-flex flex-row justify-content-between w-100">
-                <h1 class="text-light m-5"><i>Accessi-News</i></h1>
+            <div class="d-flex flex-row justify-content-between w-100 header-p1">
+                <h1 class="text-light text-nowrap m-5"><i>Accessi-News</i></h1>
 
                 <div class="dropdown ms-3">
-                    <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                        <button class="btn btn-outline-light btn-lg m-5"><i class="bi bi-list"></i></button>
-                    </a>
+                    <button class="btn btn-outline-light btn-lg m-5" id="config-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-gear-fill"></i></button>
                     <ul class="dropdown-menu custom-dropdown" aria-labelledby="dropdownMenuButton">
                         <button type="btn btn-light" class="dropdown-item opcion-config fs-5" data-bs-toggle="modal"
                             data-bs-target="#voiceOptionsModal">Opciones de Narrador</button>
@@ -38,36 +36,67 @@
                     </ul>
                 </div>
             </div>
-            
-            <nav id="header-nav">
-                <ul class="m-0 p-0 tabs-contenido d-flex flex-row">
-                    <a href="#nacionales">
-                        <li id="tab-nacionales" class="px-5 py-2">
-                            <h3>Nacionales</h3>
-                        </li>
-                    </a>
-                    <a href="#internacionales">
-                        <li id="tab-internacionales" class="px-5 py-2">
-                            <h3>Internacionales</h3>
-                        </li>
-                    </a>
-                    <a href="#deportes">
-                        <li id="tab-deportes" class="px-5 py-2">
-                            <h3>Deportes</h3>
-                        </li>
-                    </a>
-                    <a href="#tecnologia">
-                        <li id="tab-tecnologia" class="px-5 py-2">
-                            <h3>Tecnología</h3>
-                        </li>
-                    </a>
-                    <a href="#economia">
-                        <li id="tab-economia" class="px-5 py-2">
-                            <h3>Economía</h3>
-                        </li>
-                    </a>
-                </ul>
-            </nav>
+
+            <nav class="navbar navbar-expand-xxl navbar-dark p-0 header-p2" id="header-nav">
+                <div class="container-fluid">
+                  <button class="btn btn-outline-light btn-lg m-5" id="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <i class="bi bi-list"></i>
+                  </button>
+                  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav tabs-contenido">
+                            <li class="nav-item" data-bs-dismiss="offcanvas">
+                              <a class="nav-link px-5 py-2 fs-3 fw-bolder" id="tab-nacionales" href="#nacionales">Nacionales</a>
+                            </li>
+                            <li class="nav-item" data-bs-dismiss="offcanvas">
+                              <a class="nav-link px-5 py-2 fs-3 fw-bolder" id="tab-internacionales" href="#internacionales">Internacionales</a>
+                            </li>
+                            <li class="nav-item" data-bs-dismiss="offcanvas">
+                              <a class="nav-link px-5 py-2 fs-3 fw-bolder" id="tab-deportes" href="#deportes">Deportes</a>
+                            </li>
+                            <li class="nav-item" data-bs-dismiss="offcanvas">
+                              <a class="nav-link px-5 py-2 fs-3 fw-bolder" id="tab-tecnologia" href="#tecnologia">Tecnología</a>
+                            </li>
+                            </li>
+                            <li class="nav-item" data-bs-dismiss="offcanvas">
+                              <a class="nav-link px-5 py-2 fs-3 fw-bolder" id="tab-economia" href="#economia">Economia</a>
+                            </li>
+                        </ul>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+
+            <!-- <nav class="navbar navbar-expand-xxl pb-0" id="header-nav">
+                <div class="container-fluid">
+                  <button class="navbar-toggler btn btn-outline-light btn-lg m-5" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="bi bi-list"></i>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav tabs-contenido">
+                      <li class="nav-item">
+                        <a class="nav-link px-5 py-2 fs-3 fw-bolder" id="tab-nacionales" href="#nacionales">Nacionales</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link px-5 py-2 fs-3 fw-bolder" id="tab-internacionales" href="#internacionales">Internacionales</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link px-5 py-2 fs-3 fw-bolder" id="tab-deportes" href="#deportes">Deportes</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link px-5 py-2 fs-3 fw-bolder" id="tab-tecnologia" href="#tecnologia">Tecnología</a>
+                      </li>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link px-5 py-2 fs-3 fw-bolder" id="tab-economia" href="#economia">Economia</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+            </nav> -->
 
         </header>
 

@@ -120,7 +120,8 @@ async function obtenerNoticiasSimuladas(link){
             pageData.forEach(post => {
                 
                 const cardNoticia = document.createElement('div');
-                cardNoticia.className = 'col-md-4 my-5';
+                cardNoticia.className = 'col-lg-4 col-md-6 col-sm-12 my-5';
+                /* cardNoticia.className = 'col-md-4 my-5'; */
 
                 cardNoticia.innerHTML = `
                     <div class="card news-card">
@@ -175,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const $speechSelect = document.getElementById("speech-select"),
     speechMessage = new SpeechSynthesisUtterance();
 
-    console.log(window.speechSynthesis.getVoices());
+    /* console.log(window.speechSynthesis.getVoices()); */
 
     $speechSelect.addEventListener("change", function() {
     
