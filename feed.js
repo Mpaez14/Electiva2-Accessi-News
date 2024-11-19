@@ -49,7 +49,7 @@ function getSitePosts(POSTS){
                     <div class="card-body" data-card${el.id}>
 
                         <img src="${el._embedded["wp:featuredmedia"] ?el._embedded["wp:featuredmedia"][0].source_url :""}" alt="${el.title.rendered}" class="img-fluid news-image">
-                        <div class="news-description mt-2">${el.excerpt.rendered.replace("[&hellip;]", "...")}</div>
+                        <div class="news-description mt-2"><p class="p">${el.excerpt.rendered.replace("[&hellip;]", "...")}</p></div>
 
                     </div>
                 </div>

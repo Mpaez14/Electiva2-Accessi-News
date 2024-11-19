@@ -14,6 +14,11 @@ a{
     color: #01579b;
     text-decoration: none;
 }
+
+body{
+    background-color: #FFF5E1;
+}
+
 img{
     max-width: 100%;
     height: auto;
@@ -50,7 +55,7 @@ img{
     background-color: #3b81a7;
 }
 .isactive{
-    background-color: #fff;
+    background-color: #FFF5E1;
     color: #2c5e78 !important;
 }
 hr{
@@ -86,7 +91,7 @@ hr{
 }
 
 .nav-link:hover{
-    color: #fff;
+    color: #f9f4eb;
 }
 
 .menu-icon {
@@ -100,13 +105,17 @@ hr{
     overflow: hidden;
 }
 
+div.card-body {
+    background-color: #f9f4eb;
+}
+
 .news-card .card-header {
     display: flex;
     flex-direction: column;
     /* justify-content: space-between; */
     align-items: center;
     padding: 0.75em 1em;
-    background-color: #fff;
+    background-color: #f9f4eb;
     border-bottom: 1px solid #fff;
     font-weight: bold;
     height: 100%;
@@ -139,12 +148,15 @@ hr{
 .news-description {
     font-size: 1em;
     color: #555;
-    background-color: #fff;
+    background-color: #f9f4eb;
     padding: 0.5em;
     border-radius: 5px;
     margin-top: 0.5em;
     height: 15rem;
     overflow: hidden;
+}
+div.news-description{
+    background-color: #f9f4eb;
 }
 
 /* Estilo de botón Resumen */
@@ -185,7 +197,7 @@ hr{
     .nav-link{
         color: #2c5e78;
         border-radius: 0px;
-        border-color: #fff;
+        border-color: #f9f4eb;
     }
     .nav-link:hover{
         color: #2c5e78;

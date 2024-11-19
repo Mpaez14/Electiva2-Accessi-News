@@ -1,0 +1,286 @@
+/* Contraste Alto */
+.high-contrast {
+    background-color: #c300ff;
+}
+
+.high-contrast .modal-title {
+    color: #000;
+}
+
+.high-contrast .card-header,
+.news-description,
+.card-body {
+    background-color: #000;
+}
+
+.high-contrast .news-description,
+.card-body {
+    background-color: #000;
+}
+
+.high-contrast .card-body {
+    background-color: #000;
+}
+
+.high-contrast .card,
+.high-contrast .modal-content {
+    background-color: #000000;
+}
+
+.high-contrast #contrastModalLabel,
+p {
+    color: #ffffff;
+}
+
+.high-contrast span {
+    color: yellow;
+}
+
+.high-contrast .tituloPrincipal {
+    color: blue;
+}
+
+.high-contrast button {
+    background-color: blue;
+    color: #fff;
+}
+
+.high-contrast button:hover {
+    background-color: #fff;
+    color: blue;
+}
+
+.high-contrast div {
+    color: rgb(255, 0, 255);
+    font-weight: bold;
+}
+
+.high-contrast label {
+    color: #fff;
+}
+
+.high-contrast .news-date {
+    color: orange;
+    font-weight: bold;
+}
+
+.high-contrast .nav-link:hover {
+    background-color: blue;
+    color: #fff;
+}
+
+.high-contrast .nav-link {
+    color: blue;
+}
+
+.high-contrast #header li {
+    border-right: #fff;
+    border-left: #fff;
+}
+
+.high-contrast .isactive {
+
+    color: yellow !important;
+    background-color: #c300ff;
+}
+
+.high-contrast .isactive:hover {
+    background-color: blue;
+    color: #fff !important;
+}
+
+
+
+/* Modo claro */
+.light-mode {
+    background-color: #fff ;
+}
+
+.light-mode {
+    background-color: #fff;
+    color: #333;
+}
+
+.light-mode .card,
+.light-mode .modal-content {
+    background-color: #fff;
+    color: #000;
+}
+
+.light-mode #header li {
+    border-right: #fff;
+    border-left: #fff;
+}
+
+.light-mode .card-header {
+    background-color: #fff;
+}
+
+.light-mode .card-body {
+    background-color: #fff;
+}
+
+.light-mode .nav-link:hover {
+    background-color: #fff;
+    color: #c2c2c2;
+}
+
+.light-mode .nav-link {
+    color: #fff;
+}
+
+.light-mode a {
+    color: #000;
+}
+
+.light-mode .isactive {
+
+    color: #c2c2c2 !important;
+    background-color: #ffffff;
+}
+
+.light-mode .isactive:hover {
+    background-color: #c2c2c2;
+    color: #fff !important;
+}
+
+.light-mode .news-description {
+    background-color: #fff;
+}
+
+.light-mode button {
+    background-color: #c2c2c2;
+    color: #fff;
+}
+
+.light-mode button:hover {
+    background-color: #fff;
+    color: #c2c2c2;
+    border-color: #c2c2c2;
+}
+
+.light-mode .btn-dark {
+    border-color: #fff;
+}
+
+.light-mode .card {
+    border-color: #c2c2c2;
+}
+
+.light-mode .news-title {
+    color: #6a6a6a;
+    font-weight: bold;
+}
+.light-mode .news-date {
+    color: #a5a5a5;
+    font-weight: 400;
+}
+.light-mode #contrastModalLabel,
+p {
+    color: #c2c2c2;
+}
+.light-mode #applyContrastBtn
+{
+    border-color: #fff;
+}
+.light-mode .btn-secondary
+{
+    border-color: #fff;
+}
+.light-mode #applyContrastBtn:hover
+{
+    border-color: #cfcece;
+}
+.light-mode p
+{
+    color: #c2c2c2;
+}
+.light-mode label
+{
+    color: #9d9c9c;
+}
+
+/* Modo oscuro */
+.dark-mode {
+    background-color: rgb(146, 146, 146) ;
+}
+.dark-mode .nav-link {
+    color: rgb(255, 255, 255);
+    border-color: #000;
+}
+.dark-mode #header li {
+    border-right: #000000;
+    border-left: #000000;
+}
+.dark-mode .nav-link:hover {
+    background-color: rgb(49, 49, 49) ;
+}
+.dark-mode .isactive {
+
+    color: #000 !important;
+    background-color: rgb(146, 146, 146) ;
+}
+
+.dark-mode .isactive:hover {
+    background-color: rgb(49, 49, 49) ;
+    color: #fff !important;
+}
+.dark-mode .card-header,
+.news-description,
+.card-body {
+    background-color: #252525;
+}
+.dark-mode 
+.card-body {
+    background-color: #252525 ;
+}
+.dark-mode .news-description{
+    background-color: #252525;
+}
+.dark-mode .card {
+    background-color: #252525;
+}
+.dark-mode .card-header {
+    background-color: #252525;
+    border: #252525;
+}
+.dark-mode .news-title {
+    color: #ffffff;
+    font-weight: bold;
+}
+.dark-mode .news-description
+{
+    color: gray;
+    font-weight: bold;
+}
+.dark-mode .modal-content
+{
+    background-color: #000;
+    border-color: #6a6a6a;
+    color: gray;
+}
+.dark-mode button {
+    background-color: #000;
+    color: rgb(255, 255, 255);
+}
+
+.dark-mode button:hover {
+    background-color: gray;
+    color: #000;
+}
+.dark-mode #contrastModalLabel,
+p {
+    color: #c2c2c2;
+}
+.dark-mode #applyContrastBtn
+{
+    border-color: #fff;
+}
+.dark-mode .btn-secondary
+{
+    border-color: #fff;
+}
+.dark-mode #applyContrastBtn:hover
+{
+    border-color: #cfcece;
+}
