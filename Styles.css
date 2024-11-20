@@ -118,6 +118,7 @@ div.card-body {
     background-color: #f9f4eb;
     border-bottom: 1px solid #fff;
     font-weight: bold;
+    border: #f9f4eb;
     height: 100%;
     min-height: 8rem;
     max-height: 8rem;
