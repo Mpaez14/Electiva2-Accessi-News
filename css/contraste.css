@@ -33,10 +33,10 @@
     background-color: #000000;
 }
 
-.high-contrast #contrastModalLabel,
+/* .high-contrast #contrastModalLabel,
 p {
     color: #ffffff;
-}
+} */
 
 .high-contrast span {
     color: yellow;
@@ -184,10 +184,10 @@ p {
     color: #a5a5a5;
     font-weight: 400;
 }
-.light-mode #contrastModalLabel,
+/* .light-mode #contrastModalLabel,
 p {
     color: #c2c2c2;
-}
+} */
 .light-mode #applyContrastBtn
 {
     border-color: #fff;
@@ -276,10 +276,10 @@ p {
     background-color: gray;
     color: #000;
 }
-.dark-mode #contrastModalLabel,
+/* .dark-mode #contrastModalLabel,
 p {
     color: #c2c2c2;
-}
+} */
 .dark-mode #applyContrastBtn
 {
     border-color: #fff;
