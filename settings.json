@@ -1,0 +1,12 @@
+{
+    "fontSize": "medium",
+    "contrast": {
+        "selected": "normal"
+    },
+    "narrator": {
+        "voiceSpeed": 1.0,
+        "voiceVolume": 1.0,
+        "enableNarrator": false,
+        "voiceSelected": "1"
+    }
+}

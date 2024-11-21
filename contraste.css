@@ -85,8 +85,8 @@ p {
 }
 
 .high-contrast .isactive:hover {
-    background-color: blue;
-    color: #fff !important;
+    color: yellow !important;
+    background-color: #c300ff !important;
 }
 
 
@@ -140,8 +140,8 @@ p {
 }
 
 .light-mode .isactive:hover {
-    background-color: #c2c2c2;
-    color: #fff !important;
+    color: #c2c2c2 !important;
+    background-color: #ffffff !important;
 }
 
 .light-mode .news-description {
@@ -216,14 +216,13 @@ p {
     background-color: rgb(49, 49, 49) ;
 }
 .dark-mode .isactive {
-
     color: #000 !important;
     background-color: rgb(146, 146, 146) ;
 }
 
 .dark-mode .isactive:hover {
-    background-color: rgb(49, 49, 49) ;
-    color: #fff !important;
+    color: #000 !important;
+    background-color: rgb(146, 146, 146) !important;
 }
 .dark-mode .card-header,
 .news-description,

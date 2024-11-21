@@ -51,9 +51,6 @@ img{
     cursor: pointer;
     transition: all .2s;
 }
-#header ul > li:hover{
-    background-color: #3b81a7;
-}
 .isactive{
     background-color: #FFF5E1;
     color: #2c5e78 !important;
