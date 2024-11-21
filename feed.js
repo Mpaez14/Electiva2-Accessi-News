@@ -13,6 +13,105 @@ let voces = [];
 let paginaActual = 1;
 let noticiasPorPagina = 6;
 
+
+function narrarContenido(el) {
+    detenerNarracion(); // Asegúrate de que no se superpongan narraciones.
+    if (!document.getElementById("enableNarrator").checked) return; // Si el narrador está desactivado, no hacer nada.
+
+    const narrador = new SpeechSynthesisUtterance();
+    const vocesDisponibles = window.speechSynthesis.getVoices();
+    const vozSeleccionada = vocesDisponibles.find((voz) => voz.name === document.getElementById("speech-select").value);
+
+    if (vozSeleccionada) narrador.voice = vozSeleccionada;
+
+
+    narrador.text = `
+        Título: ${el.titulo}. 
+        Fecha: ${el.fecha}. 
+        Descripción: ${el.descripcion}.
+        Botón, ver resumen de : ${el.titulo}.
+    `;
+    narrador.rate = parseFloat(document.getElementById("voiceSpeed").value) || 1;
+    narrador.volume = parseFloat(document.getElementById("voiceVolume").value) || 1;
+
+    window.speechSynthesis.speak(narrador);
+}
+
+    
+
+
+// Añadir eventos de narración a modales
+function configurarNarracionModales() {
+    document.querySelectorAll(".modal").forEach((modal) => {
+        // Al abrir el modal, no narrar automáticamente todo el contenido
+        modal.addEventListener("shown.bs.modal", () => {
+            console.log(`Modal "${modal.id}" abierto. Narración desactivada al cargar.`);
+        });
+
+        // Configurar eventos en elementos dentro del modal
+        modal.querySelectorAll(".modal-body *, .modal-footer *").forEach((elemento) => {
+            elemento.addEventListener("mouseenter", () => narrarTexto(elemento.textContent.trim()));
+            elemento.addEventListener("focus", () => narrarTexto(elemento.textContent.trim()));
+        });
+    });
+}
+
+// Narrador universal
+function narrarTexto(texto) {
+    detenerNarracion(); // Asegúrate de que no se superpongan narraciones.
+
+    if (!document.getElementById("enableNarrator").checked) return; // Si el narrador está desactivado, no hacer nada.
+
+    const narrador = new SpeechSynthesisUtterance();
+    const vocesDisponibles = window.speechSynthesis.getVoices();
+    const vozSeleccionada = vocesDisponibles.find((voz) => voz.name === document.getElementById("speech-select").value);
+
+    if (vozSeleccionada) narrador.voice = vozSeleccionada;
+
+    narrador.text = texto;
+    narrador.rate = parseFloat(document.getElementById("voiceSpeed").value) || 1;
+    narrador.volume = parseFloat(document.getElementById("voiceVolume").value) || 1;
+
+    window.speechSynthesis.speak(narrador);
+}
+
+// Detener narración
+function detenerNarracion() {
+    if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+    }
+}
+
+
+
+// Añadir eventos de narración a configuraciones y navegación
+function configurarNarracion() {
+    // Narrar secciones del menú (hover y foco)
+    document.querySelectorAll("#header-nav a").forEach((enlace) => {
+        enlace.addEventListener("focus", () => narrarTexto(enlace.textContent.trim()));
+        enlace.addEventListener("mouseenter", () => narrarTexto(enlace.textContent.trim()));
+    });
+
+    // Narrar configuraciones del dropdown (hover y foco)
+    document.querySelectorAll(".dropdown-item").forEach((item) => {
+        item.addEventListener("focus", () => narrarTexto(item.textContent.trim()));
+        item.addEventListener("mouseenter", () => narrarTexto(item.textContent.trim()));
+    });
+
+    // Narrar contenido de las cards
+    document.querySelectorAll(".card").forEach((card) => {
+        card.addEventListener("focus", () => narrarTexto(card.textContent.trim()));
+        card.addEventListener("mouseenter", () => narrarTexto(card.textContent.trim()));
+    });
+    configurarNarracionModales();
+
+    // Narrar botones u otros elementos al usar Tab
+    document.querySelectorAll("button, input").forEach((elemento) => {
+        elemento.addEventListener("focus", () => narrarTexto(elemento.getAttribute("aria-label") || elemento.textContent.trim()));
+        elemento.addEventListener("mouseenter", () => narrarTexto(elemento.getAttribute("aria-label") || elemento.textContent.trim()));
+    
+    }); 
+}
 let flagCargandoNoticias = false; // Variable para evitar llamadas múltiples
 
 function getSitePosts(POSTS){
@@ -35,55 +134,78 @@ function getSitePosts(POSTS){
 
             const cardNoticia = document.createElement('div');
             cardNoticia.className = 'col-md-4 my-5';
-
+            
             cardNoticia.innerHTML = `
-                <div class="card news-card">
-
-                    <div class="card-header">
-
-                        <span class="news-date pb-3">${new Date(el.date).toLocaleString()}</span>
-                        <a href="${el.link}" class="post-link" target="_blank" tabindex="-1"><span class="news-title" title="${el.title.rendered}">${el.title.rendered}</span></a>
-
-                    </div>
-
-                    <div class="card-body" data-card${el.id}>
-
-                        <img src="${el._embedded["wp:featuredmedia"] ?el._embedded["wp:featuredmedia"][0].source_url :""}" alt="${el.title.rendered}" class="img-fluid news-image">
-                        <div class="news-description mt-2"><p class="p">${el.excerpt.rendered.replace("[&hellip;]", "...")}</p></div>
-
+            <div class="card news-card" tabindex="0" aria-labelledby="card-title-${el.id}">
+        
+                <div class="card-header">
+                    <span class="news-date pb-3">${new Date(el.date).toLocaleString()}</span>
+                    <a href="${el.link}" class="post-link" target="_blank" tabindex="-1">
+                        <span id="card-title-${el.id}" class="news-title" title="${el.title.rendered}">
+                            ${el.title.rendered}
+                        </span>
+                    </a>
+                </div>
+        
+                <div class="card-body" data-card${el.id}>
+                    <img src="${el._embedded["wp:featuredmedia"] ? el._embedded["wp:featuredmedia"][0].source_url : ""}" 
+                        alt="${el.title.rendered}" class="img-fluid news-image">
+                    <div class="news-description mt-2">
+                        <p class="p">${el.excerpt.rendered.replace("[&hellip;]", "...")}</p>
                     </div>
                 </div>
-            `;
+            </div>
+        `;
 
-            // Recibo el contenido en formato de string html desde la API
-            const htmlString = el.content.rendered;
+cardNoticia.addEventListener('mouseenter', () => narrarContenido(el));
+cardNoticia.addEventListener('mouseleave', detenerNarracion);
 
-            // Creo un elemento temporal para parsear el HTML
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = htmlString;
+cardNoticia.addEventListener('focusin', () => narrarContenido(el)); // Cuando el card recibe el foco
+cardNoticia.addEventListener('focusout', detenerNarracion); // Cuando se pierde el foco
 
-            // Selecciono solo los elementos que sean textuales
-            const elements = tempDiv.querySelectorAll('p, span');
 
-            // Extraigo el texto de cada elemento y lo almaceno en un array
-            const textoExtraido = Array.from(elements).map(element => element.textContent);
 
-            const resumenBtn = document.createElement("button");
-            resumenBtn.className = "btn btn-dark btn-resumen";
-            resumenBtn.setAttribute("data-bs-toggle", "modal");
-            resumenBtn.setAttribute("data-bs-target", "#modalContenidoNoticia");
-            resumenBtn.textContent = "Resumen";
+                const resumenBtn = document.createElement("button");
+                resumenBtn.className = "btn btn-dark btn-resumen";
+                resumenBtn.setAttribute("data-bs-toggle", "modal");
+                resumenBtn.setAttribute("data-bs-target", "#modalContenidoNoticia");
+                resumenBtn.setAttribute("aria-label", `Resumen: ${el.title.rendered}`);
+                resumenBtn.setAttribute("aria-labelledby", "modalLabelNoticia");
+                resumenBtn.setAttribute("tabindex", "0");
+                resumenBtn.textContent = "Resumen";
 
-            resumenBtn.addEventListener("click", function (){
-                document.querySelector(".modal-new-title").innerHTML = el.title.rendered; 
-                document.querySelector(".modal-new-date").innerHTML = new Date(el.date).toLocaleString(); 
-                document.querySelector(".modal-new-content").innerHTML = textoExtraido;
-                document.querySelector(".modal-new-link").href = el.link;
-            });
 
-            $posts.appendChild(cardNoticia);
+                resumenBtn.addEventListener("focusin", (e) => {
+                    e.stopPropagation();  // Evita que el evento se propague y afecte a otros elementos
+                    narrarContenidoBoton(el.title.rendered);
+                });
+                
+                
+                // Cuando el foco se pierde en el botón
+                resumenBtn.addEventListener("focusout", () => {
+                    detenerNarracion();
+                });
+                const textoExtraido = Array.from(elements).map(element => element.textContent);
+                
+                resumenBtn.addEventListener("click", function (e){
+                    document.querySelector(".modal-new-title").innerHTML = el.title.rendered; 
+                    document.querySelector(".modal-new-date").innerHTML = el.date; 
+                    document.querySelector(".modal-new-content").innerHTML = textoExtraido;
+                    document.querySelector(".modal-new-link").href = el.link;
+                    e.stopPropagation();
 
-            document.querySelector(`[data-card${el.id}]`).appendChild(resumenBtn);
+                    // Retraso para esperar que el modal se haya abierto completamente y el contenido esté cargado
+                    setTimeout(() => {
+                        narrarContenidoModal(el); // Iniciar la narración después de que el modal se haya abierto
+                    }, 500);  // Ajusta el tiempo de espera si es necesario
+                    
+                });
+                document.getElementById("modalContenidoNoticia").addEventListener("mouseenter", function (e) {
+                    e.stopPropagation();
+                    narrarContenidoModal(el);  // Llama a la función para narrar el contenido
+                });
+                $posts.appendChild(cardNoticia);
+                document.querySelector(`[data-card${el.id}]`).appendChild(resumenBtn);
 
         });
 
@@ -99,6 +221,49 @@ function getSitePosts(POSTS){
         flagCargandoNoticias = false; // Restablece la variable cuando finaliza la carga
     });
 };
+
+function narrarContenidoBoton(titulo) {
+    detenerNarracion();
+    if (!document.getElementById("enableNarrator").checked) return;  // Si el narrador está desactivado, no hacer nada
+
+    const narrador = new SpeechSynthesisUtterance();
+    const vocesDisponibles = window.speechSynthesis.getVoices();
+    const vozSeleccionada = vocesDisponibles.find((voz) => voz.name === document.getElementById("speech-select").value);
+
+    if (vozSeleccionada) narrador.voice = vozSeleccionada;
+
+    narrador.text = `Botón: Resumen de la noticia: ${titulo}`; 
+    narrador.rate = parseFloat(document.getElementById("voiceSpeed").value) || 1;
+    narrador.volume = parseFloat(document.getElementById("voiceVolume").value) || 1;
+
+    window.speechSynthesis.speak(narrador);
+}
+
+// Función para narrar el contenido del modal
+function narrarContenidoModal(post) {
+    detenerNarracion();
+    if (!document.getElementById("enableNarrator").checked) return;  // Si el narrador está desactivado, no hacer nada
+
+    const narrador = new SpeechSynthesisUtterance();
+    const vocesDisponibles = window.speechSynthesis.getVoices();
+    const vozSeleccionada = vocesDisponibles.find((voz) => voz.name === document.getElementById("speech-select").value);
+
+    if (vozSeleccionada) narrador.voice = vozSeleccionada;
+
+    narrador.text = `
+        Noticia ampliada, Título: ${post.titulo}.
+        Fecha: ${post.fecha}.
+        Contenido completo: ${post.texto_completo}.
+        Para más detalles, visite el enlace.
+    `;
+    narrador.rate = parseFloat(document.getElementById("voiceSpeed").value) || 1;
+    narrador.volume = parseFloat(document.getElementById("voiceVolume").value) || 1;
+
+    window.speechSynthesis.speak(narrador);
+}
+
+
+
 
 async function obtenerNoticiasSimuladas(link){
     try {
@@ -124,46 +289,79 @@ async function obtenerNoticiasSimuladas(link){
                 /* cardNoticia.className = 'col-md-4 my-5'; */
 
                 cardNoticia.innerHTML = `
-                    <div class="card news-card">
+    <div class="card news-card" tabindex="0" aria-labelledby="card-title-${post.id}">
 
-                        <div class="card-header">
+        <div class="card-header">
+            <span class="news-date pb-3">${post.fecha}</span>
+            <a href="${post.link_fuente}" class="post-link" target="_blank" tabindex="-1">
+                <span id="card-title-${post.id}" class="news-title" title="${post.titulo}">
+                    ${post.titulo}
+                </span>
+            </a>
+        </div>
 
-                            <span class="news-date pb-3">${post.fecha}</span>
-                            <a href="${post.link_fuente}" class="post-link" target="_blank" tabindex="-1"><span class="news-title" title="${post.titulo}">${post.titulo}</span></a>
+        <div class="card-body" data-card${post.id}>
+            <img src="${post.link_imagen_portada}" alt="${post.titulo}" class="img-fluid news-image">
+            <div class="news-description mt-2">${post.descripcion}</div>
+        </div>
+    </div>
+`;
 
-                        </div>
+// Eventos para hover
+cardNoticia.addEventListener('mouseenter', () => narrarContenido(post));
+cardNoticia.addEventListener('mouseleave', detenerNarracion);
 
-                        <div class="card-body" data-card${post.id}>
+cardNoticia.addEventListener('focusin', () => narrarContenido(post)); 
+cardNoticia.addEventListener('focusout', detenerNarracion); 
 
-                            <img src="${post.link_imagen_portada}" alt="${post.titulo}" class="img-fluid news-image">
-                            <div class="news-description mt-2">${post.descripcion}</div>
 
-                        </div>
-                    </div>
-                `;
 
                 const resumenBtn = document.createElement("button");
                 resumenBtn.className = "btn btn-dark btn-resumen";
                 resumenBtn.setAttribute("data-bs-toggle", "modal");
                 resumenBtn.setAttribute("data-bs-target", "#modalContenidoNoticia");
+                resumenBtn.setAttribute("aria-label", `Resumen: ${post.titulo}`);
+                resumenBtn.setAttribute("aria-labelledby", "modalLabelNoticia");
+                resumenBtn.setAttribute("tabindex", "0");
                 resumenBtn.textContent = "Resumen";
 
-                resumenBtn.addEventListener("click", function (){
+
+                resumenBtn.addEventListener("focusin", (e) => {
+                    e.stopPropagation();  // Evita que el evento se propague y afecte a otros elementos
+                    narrarContenidoBoton(post.titulo);
+                });
+                
+                
+                resumenBtn.addEventListener("focusout", () => {
+                    detenerNarracion();
+                });
+
+                
+                resumenBtn.addEventListener("click", function (e){
                     document.querySelector(".modal-new-title").innerHTML = post.titulo; 
                     document.querySelector(".modal-new-date").innerHTML = post.fecha; 
                     document.querySelector(".modal-new-content").innerHTML = post.texto_completo;
                     document.querySelector(".modal-new-link").href = post.link_fuente;
+                    e.stopPropagation();
+
+                    // Retraso para esperar que el modal se haya abierto completamente y el contenido esté cargado
+                    setTimeout(() => {
+                        narrarContenidoModal(post); // Iniciar la narración después de que el modal se haya abierto
+                    }, 500);  // Ajusta el tiempo de espera si es necesario
+                    
                 });
-
+                document.getElementById("modalContenidoNoticia").addEventListener("mouseenter", function (e) {
+                    e.stopPropagation();
+                    narrarContenidoModal(post);
+                });
                 $posts.appendChild(cardNoticia);
-
                 document.querySelector(`[data-card${post.id}]`).appendChild(resumenBtn);
             });
 
             paginaActual++;
 
         } else {
-          console.log("No hay más publicaciones para cargar.");
+            console.log("No hay más publicaciones para cargar.");
         }
 
     } catch (error) {
@@ -234,6 +432,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
+    configurarNarracion();
 });
 
 function verificarSeccion(){
@@ -258,7 +457,7 @@ function mostrarLoader(segundos) {
     // Ocultar el loader y mostrar las cards después del tiempo especificado
     setTimeout(() => {
         loader.classList.add('d-none');
-      cardsContainer.classList.remove('d-none');
+        cardsContainer.classList.remove('d-none');
     }, segundos * 1000);
 }
 
