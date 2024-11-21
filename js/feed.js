@@ -3,11 +3,11 @@ recognition.continuous = true;
 recognition.lang = 'es-ES';
 recognition.interimResult = false;
 
-const API_Nacionales = "";
-const API_Internacionales = "";
-const API_Deportes = "./noticias-deportes.json";
-const API_Tecnologia = "./noticias-tecnologia.json";
-const API_Economia = "./noticias-economia.json";
+const API_Nacionales = "https://www.elciudadanoweb.com/wp-json/wp/v2/posts?_embed";
+const API_Internacionales = "https://www.eldiario.com/wp-json/wp/v2/posts?_embed";
+const API_Deportes = "./json/noticias-deportes.json";
+const API_Tecnologia = "./json/noticias-tecnologia.json";
+const API_Economia = "./json/noticias-economia.json";
 
 let voces = [];
 let paginaActual = 1;
@@ -185,6 +185,17 @@ cardNoticia.addEventListener('focusout', detenerNarracion); // Cuando se pierde 
                 resumenBtn.addEventListener("focusout", () => {
                     detenerNarracion();
                 });
+
+                // Recibo el contenido en formato de string html desde la API
+            const htmlString = el.content.rendered;
+
+            // Creo un elemento temporal para parsear el HTML
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = htmlString;
+
+            // Selecciono solo los elementos que sean textuales
+            const elements = tempDiv.querySelectorAll('p, span');
+
                 const textoExtraido = Array.from(elements).map(element => element.textContent);
                 
                 resumenBtn.addEventListener("click", function (e){
@@ -213,8 +224,9 @@ cardNoticia.addEventListener('focusout', detenerNarracion); // Cuando se pierde 
         loader.classList.add("d-none");
     })
     .catch(err => {
-        let message = err.statusText || "Ocurrió un error";
-        $posts.innerHTML = `Error ${err.status}: ${message}`;
+        /* let message = err.statusText || "Ocurrió un error"; */
+        /* $posts.innerHTML = `Error ${err.status}: ${message}`; */
+        console.log(err);
         loader.classList.add("d-none");
     })
     .finally( function() {
@@ -410,12 +422,12 @@ document.addEventListener("DOMContentLoaded", () => {
             
             switch (location.hash) {
                 case "#nacionales":
-                    /* getSitePosts(API_Nacionales); */
-                    obtenerNoticiasSimuladas(API_Tecnologia);
+                    getSitePosts(API_Nacionales);
+                    /* obtenerNoticiasSimuladas(API_Tecnologia); */
                     break;
                 case "#internacionales":
-                    /* getSitePosts(API_Internacionales); */
-                    obtenerNoticiasSimuladas(API_Economia);
+                    getSitePosts(API_Internacionales);
+                    /* obtenerNoticiasSimuladas(API_Economia); */
                     break;
                 case "#deportes":
                     obtenerNoticiasSimuladas(API_Deportes);
@@ -485,8 +497,8 @@ function manejarContenido(seccion){
 
             $posts.innerHTML = ``;
 
-            /* getSitePosts(API_Nacionales); */
-            obtenerNoticiasSimuladas(API_Economia);
+            getSitePosts(API_Nacionales);
+            /* obtenerNoticiasSimuladas(API_Economia); */
 
         break;
 
@@ -502,8 +514,8 @@ function manejarContenido(seccion){
 
             $posts.innerHTML = ``;
 
-            /* getSitePosts(API_Internacionales); */
-            obtenerNoticiasSimuladas(API_Tecnologia);
+            getSitePosts(API_Internacionales);
+            /* obtenerNoticiasSimuladas(API_Tecnologia); */
 
         break;
 

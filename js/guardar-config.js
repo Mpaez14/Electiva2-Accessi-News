@@ -112,7 +112,7 @@ function loadSettings() {
 
     try {
 
-        fetch('./settings.json')
+        fetch('./json/settings.json')
         .then(response => response.json())
         .then(config => {
             /* console.log('Configuración cargada desde settings.json:', config); // Mostrar la configuración en consola */
