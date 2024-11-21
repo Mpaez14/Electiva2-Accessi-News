@@ -468,12 +468,12 @@ document.addEventListener("DOMContentLoaded", () => {
             
             switch (location.hash) {
                 case "#nacionales":
-                    /* getSitePosts(API_Nacionales); */
-                    obtenerNoticiasSimuladas(API_Tecnologia);
+                    getSitePosts(API_Nacionales);
+                    /* obtenerNoticiasSimuladas(API_Tecnologia); */
                     break;
                 case "#internacionales":
-                    /* getSitePosts(API_Internacionales); */
-                    obtenerNoticiasSimuladas(API_Economia);
+                    getSitePosts(API_Internacionales);
+                    /* obtenerNoticiasSimuladas(API_Economia); */
                     break;
                 case "#deportes":
                     obtenerNoticiasSimuladas(API_Deportes);
@@ -543,8 +543,8 @@ function manejarContenido(seccion){
 
             $posts.innerHTML = ``;
 
-            /* getSitePosts(API_Nacionales); */
-            obtenerNoticiasSimuladas(API_Economia);
+            getSitePosts(API_Nacionales);
+            /* obtenerNoticiasSimuladas(API_Economia); */
 
         break;
 
@@ -560,8 +560,8 @@ function manejarContenido(seccion){
 
             $posts.innerHTML = ``;
 
-            /* getSitePosts(API_Internacionales); */
-            obtenerNoticiasSimuladas(API_Tecnologia);
+            getSitePosts(API_Internacionales);
+            /* obtenerNoticiasSimuladas(API_Tecnologia); */
 
         break;
 
