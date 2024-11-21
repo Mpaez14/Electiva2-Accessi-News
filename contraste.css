@@ -2,6 +2,9 @@
 .high-contrast {
     background-color: #c300ff;
 }
+.high-contrast a{
+    color:  #ff4141;
+}
 
 .high-contrast .modal-title {
     color: #000;
