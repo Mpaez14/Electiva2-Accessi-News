@@ -14,7 +14,9 @@ a{
     color: #01579b;
     text-decoration: none;
 }
-
+#seleccionarContraste{
+    color: black ;
+}
 body{
     background-color: #FFF5E1;
 }

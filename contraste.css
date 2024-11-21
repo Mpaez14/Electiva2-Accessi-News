@@ -6,6 +6,9 @@
 .high-contrast .modal-title {
     color: #000;
 }
+.high-contrast #seleccionarContraste {
+    color: #fff;
+}
 
 .high-contrast .card-header,
 .news-description,
@@ -118,6 +121,9 @@ p {
 
 .light-mode .card-body {
     background-color: #fff;
+}
+.light-mode #seleccionarContraste {
+    color: #9d9c9c;
 }
 
 .light-mode .nav-link:hover {
@@ -282,4 +288,7 @@ p {
 .dark-mode #applyContrastBtn:hover
 {
     border-color: #cfcece;
+}
+.dark-mode #seleccionarContraste {
+    color:gray;
 }
