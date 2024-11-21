@@ -37,7 +37,28 @@ function narrarContenido(el) {
     window.speechSynthesis.speak(narrador);
 }
 
-    
+function narrarContenido2(el) {
+    detenerNarracion(); // Asegúrate de que no se superpongan narraciones.
+    if (!document.getElementById("enableNarrator").checked) return; // Si el narrador está desactivado, no hacer nada.
+
+    const narrador = new SpeechSynthesisUtterance();
+    const vocesDisponibles = window.speechSynthesis.getVoices();
+    const vozSeleccionada = vocesDisponibles.find((voz) => voz.name === document.getElementById("speech-select").value);
+
+    if (vozSeleccionada) narrador.voice = vozSeleccionada;
+
+
+    narrador.text = `
+        Título: ${el.title.rendered}. 
+        Fecha: ${el.date}. 
+        Descripción: ${el.excerpt.rendered.replace("[&hellip;]", "...")}.
+        Botón, ver resumen de : ${el.title.rendered}.
+    `;
+    narrador.rate = parseFloat(document.getElementById("voiceSpeed").value) || 1;
+    narrador.volume = parseFloat(document.getElementById("voiceVolume").value) || 1;
+
+    window.speechSynthesis.speak(narrador);
+}
 
 
 // Añadir eventos de narración a modales
@@ -112,6 +133,69 @@ function configurarNarracion() {
     
     }); 
 }
+
+function narrarContenidoBoton(titulo) {
+    detenerNarracion();
+    if (!document.getElementById("enableNarrator").checked) return;  // Si el narrador está desactivado, no hacer nada
+
+    const narrador = new SpeechSynthesisUtterance();
+    const vocesDisponibles = window.speechSynthesis.getVoices();
+    const vozSeleccionada = vocesDisponibles.find((voz) => voz.name === document.getElementById("speech-select").value);
+
+    if (vozSeleccionada) narrador.voice = vozSeleccionada;
+
+    narrador.text = `Botón: Resumen de la noticia: ${titulo}`; 
+    narrador.rate = parseFloat(document.getElementById("voiceSpeed").value) || 1;
+    narrador.volume = parseFloat(document.getElementById("voiceVolume").value) || 1;
+
+    window.speechSynthesis.speak(narrador);
+}
+
+// Función para narrar el contenido del modal
+function narrarContenidoModal(post) {
+    detenerNarracion();
+    if (!document.getElementById("enableNarrator").checked) return;  // Si el narrador está desactivado, no hacer nada
+
+    const narrador = new SpeechSynthesisUtterance();
+    const vocesDisponibles = window.speechSynthesis.getVoices();
+    const vozSeleccionada = vocesDisponibles.find((voz) => voz.name === document.getElementById("speech-select").value);
+
+    if (vozSeleccionada) narrador.voice = vozSeleccionada;
+
+    narrador.text = `
+        Noticia ampliada, Título: ${post.titulo}.
+        Fecha: ${post.fecha}.
+        Contenido completo: ${post.texto_completo}.
+        Para más detalles, visite el enlace.
+    `;
+    narrador.rate = parseFloat(document.getElementById("voiceSpeed").value) || 1;
+    narrador.volume = parseFloat(document.getElementById("voiceVolume").value) || 1;
+
+    window.speechSynthesis.speak(narrador);
+}
+
+function narrarContenidoModal2(el, descripcioncompleta) {
+    detenerNarracion();
+    if (!document.getElementById("enableNarrator").checked) return;  // Si el narrador está desactivado, no hacer nada
+
+    const narrador = new SpeechSynthesisUtterance();
+    const vocesDisponibles = window.speechSynthesis.getVoices();
+    const vozSeleccionada = vocesDisponibles.find((voz) => voz.name === document.getElementById("speech-select").value);
+
+    if (vozSeleccionada) narrador.voice = vozSeleccionada;
+
+    narrador.text = `
+        Noticia ampliada, Título: ${el.title.rendered}.
+        Fecha: ${el.date}.
+        Contenido completo: ${descripcioncompleta}.
+        Para más detalles, visite el enlace.
+    `;
+    narrador.rate = parseFloat(document.getElementById("voiceSpeed").value) || 1;
+    narrador.volume = parseFloat(document.getElementById("voiceVolume").value) || 1;
+
+    window.speechSynthesis.speak(narrador);
+}
+
 let flagCargandoNoticias = false; // Variable para evitar llamadas múltiples
 
 function getSitePosts(POSTS){
@@ -157,10 +241,10 @@ function getSitePosts(POSTS){
             </div>
         `;
 
-cardNoticia.addEventListener('mouseenter', () => narrarContenido(el));
+cardNoticia.addEventListener('mouseenter', () => narrarContenido2(el));
 cardNoticia.addEventListener('mouseleave', detenerNarracion);
 
-cardNoticia.addEventListener('focusin', () => narrarContenido(el)); // Cuando el card recibe el foco
+cardNoticia.addEventListener('focusin', () => narrarContenido2(el)); // Cuando el card recibe el foco
 cardNoticia.addEventListener('focusout', detenerNarracion); // Cuando se pierde el foco
 
 
@@ -207,13 +291,13 @@ cardNoticia.addEventListener('focusout', detenerNarracion); // Cuando se pierde 
 
                     // Retraso para esperar que el modal se haya abierto completamente y el contenido esté cargado
                     setTimeout(() => {
-                        narrarContenidoModal(el); // Iniciar la narración después de que el modal se haya abierto
+                        narrarContenidoModal2(el, textoExtraido); // Iniciar la narración después de que el modal se haya abierto
                     }, 500);  // Ajusta el tiempo de espera si es necesario
                     
                 });
                 document.getElementById("modalContenidoNoticia").addEventListener("mouseenter", function (e) {
                     e.stopPropagation();
-                    narrarContenidoModal(el);  // Llama a la función para narrar el contenido
+                    narrarContenidoModal2(el);  // Llama a la función para narrar el contenido
                 });
                 $posts.appendChild(cardNoticia);
                 document.querySelector(`[data-card${el.id}]`).appendChild(resumenBtn);
@@ -234,45 +318,7 @@ cardNoticia.addEventListener('focusout', detenerNarracion); // Cuando se pierde 
     });
 };
 
-function narrarContenidoBoton(titulo) {
-    detenerNarracion();
-    if (!document.getElementById("enableNarrator").checked) return;  // Si el narrador está desactivado, no hacer nada
 
-    const narrador = new SpeechSynthesisUtterance();
-    const vocesDisponibles = window.speechSynthesis.getVoices();
-    const vozSeleccionada = vocesDisponibles.find((voz) => voz.name === document.getElementById("speech-select").value);
-
-    if (vozSeleccionada) narrador.voice = vozSeleccionada;
-
-    narrador.text = `Botón: Resumen de la noticia: ${titulo}`; 
-    narrador.rate = parseFloat(document.getElementById("voiceSpeed").value) || 1;
-    narrador.volume = parseFloat(document.getElementById("voiceVolume").value) || 1;
-
-    window.speechSynthesis.speak(narrador);
-}
-
-// Función para narrar el contenido del modal
-function narrarContenidoModal(post) {
-    detenerNarracion();
-    if (!document.getElementById("enableNarrator").checked) return;  // Si el narrador está desactivado, no hacer nada
-
-    const narrador = new SpeechSynthesisUtterance();
-    const vocesDisponibles = window.speechSynthesis.getVoices();
-    const vozSeleccionada = vocesDisponibles.find((voz) => voz.name === document.getElementById("speech-select").value);
-
-    if (vozSeleccionada) narrador.voice = vozSeleccionada;
-
-    narrador.text = `
-        Noticia ampliada, Título: ${post.titulo}.
-        Fecha: ${post.fecha}.
-        Contenido completo: ${post.texto_completo}.
-        Para más detalles, visite el enlace.
-    `;
-    narrador.rate = parseFloat(document.getElementById("voiceSpeed").value) || 1;
-    narrador.volume = parseFloat(document.getElementById("voiceVolume").value) || 1;
-
-    window.speechSynthesis.speak(narrador);
-}
 
 
 
