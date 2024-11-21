@@ -47,10 +47,19 @@ function narrarContenido2(el) {
 
     if (vozSeleccionada) narrador.voice = vozSeleccionada;
 
+    const fechaFormateada = new Intl.DateTimeFormat("es-ES", {
+        weekday: "long", // Nombre del día
+        year: "numeric", // Año
+        month: "long",  // Nombre completo del mes
+        day: "numeric", // Día del mes
+        hour: "numeric", // Hora
+        minute: "numeric", // Minuto
+        second: "numeric", // Segundo
+    }).format(new Date(el.date));
 
     narrador.text = `
         Título: ${el.title.rendered}. 
-        Fecha: ${el.date}. 
+        Fecha: ${fechaFormateada}. 
         Descripción: ${el.excerpt.rendered.replace("[&hellip;]", "...")}.
         Botón, ver resumen de : ${el.title.rendered}.
     `;
@@ -183,10 +192,19 @@ function narrarContenidoModal2(el, descripcioncompleta) {
     const vozSeleccionada = vocesDisponibles.find((voz) => voz.name === document.getElementById("speech-select").value);
 
     if (vozSeleccionada) narrador.voice = vozSeleccionada;
+    const fechaFormateada = new Intl.DateTimeFormat("es-ES", {
+        weekday: "long", // Nombre del día
+        year: "numeric", // Año
+        month: "long",  // Nombre completo del mes
+        day: "numeric", // Día del mes
+        hour: "numeric", // Hora
+        minute: "numeric", // Minuto
+        second: "numeric", // Segundo
+    }).format(new Date(el.date));
 
     narrador.text = `
         Noticia ampliada, Título: ${el.title.rendered}.
-        Fecha: ${el.date}.
+        Fecha: ${fechaFormateada}.
         Contenido completo: ${descripcioncompleta}.
         Para más detalles, visite el enlace.
     `;
